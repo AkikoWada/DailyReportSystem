@@ -8,7 +8,28 @@
 <body>
     <h1>従業員管理システム</h1>
     <h2>id:XXの従業員情報　詳細ページ</h2>
-
+        <table>
+            <tr>
+                <td>社員番号</td>
+                <td th:text="*{code}"></td>
+            </tr>
+            <tr>
+                <td>氏名</td>
+                <td th:text="$*{name}"></td>
+            </tr>
+            <tr>
+                <td>権限</td>
+                <td th:text="$*{ole}"></td>
+            </tr>
+            <tr>
+                <td>登録日時</td>
+                <td th:text="$*{createdAt}"></td>
+            </tr>
+            <tr>
+                <td>更新日時</td>
+                <td th:text="$*{updatedAt}"></td>
+            </tr>
+        </table>
     </form>
     <script th:src="@{/js/user/list.js}"></script><!-- 未確認 -->
     <a th:href="@{/employee/detail}">この従業員情報を更新する</a>
