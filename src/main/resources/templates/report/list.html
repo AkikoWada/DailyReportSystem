@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial of Develop</title>
+    <link rel="stylesheet" th:href="@{/css/user/list.css}">
+</head>
+<body>
+    <h1>日報管理システム</h1>
+    <h2>日報一覧(全件)</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+        </tr>
+        <tr th:each="user : ${userlist}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.name}"></td>
+        </tr>
+    </table>
+</body>
+</html>
