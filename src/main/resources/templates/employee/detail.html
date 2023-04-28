@@ -24,14 +24,14 @@
             </tr>
             <tr>
                 <td>登録日時</td>
-                <td th:text="${#temporals.format(employee.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+                <td th:text="${employee.createdAt}"></td>
             <tr>
                 <td>更新日時</td>
-                <td th:text="${#temporals.format(employee.updatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+                <td th:text="${employee.updatedAt}"></td>
             </tr>
         </table>
 
-    <a th:href="@{'/update/'+${employee.id}+'/'}">この従業員情報を更新する</a><br />
-    <a th:href="@{/}">一覧に戻る</a>
+    <a th:href="@{'/employee/update/'+${employee.id}+'/'}">この従業員情報を更新する</a><br />
+    <a th:href="@{/employee/}">一覧に戻る</a>
 </body>
 </html>

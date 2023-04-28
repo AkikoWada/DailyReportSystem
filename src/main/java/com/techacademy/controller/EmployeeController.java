@@ -3,14 +3,15 @@ package com.techacademy.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.techacademy.entity.Employee;
 import com.techacademy.service.EmployeeService;
 
 @Controller
-/** @RequestMapping("employee")*/
+@RequestMapping("employee")
 public class EmployeeController {
     private final EmployeeService service;
 
@@ -39,7 +40,6 @@ public class EmployeeController {
     /** Employee更新画面を表示 */
     @GetMapping("/update/{id}/")
     public String updateEmployee(@PathVariable("id") Integer id, Model model) {
-        // ↑当初「ublic String getEmployee」にしていて重複エラーとなったため変更してみた
         // Modelに登録
         model.addAttribute("employee", service.getEmployee(id));
         // 更新画面に遷移
@@ -52,23 +52,23 @@ public class EmployeeController {
         // Employee登録
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト
-        return "redirect:/list";
+        return "redirect:employee/";
     }
 
     /** Employee登録画面を表示 */
-    @GetMapping("/register")
-    public String getRegister(@ModelAttribute Employee employee) {
+    @GetMapping("/register/")
+    public String getRegister() {
         // Employee登録画面に遷移
         return "employee/register";
     }
 
     /** Employee登録処理 */
-    @PostMapping("/register")
+    @PostMapping("/register/")
     public String postRegister(Employee employee) {
         // Employee登録
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト
-        return "redirect:/list";
+        return "redirect:/";
     }
 
     /** Employee削除画面を表示 */
@@ -88,6 +88,4 @@ public class EmployeeController {
         // 一覧画面にリダイレクト
         return "redirect:/";
     }
-
-
 }

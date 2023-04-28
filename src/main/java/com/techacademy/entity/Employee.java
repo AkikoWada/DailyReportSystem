@@ -1,6 +1,7 @@
 package com.techacademy.entity;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -43,12 +44,12 @@ public class Employee {
     /** 登録日時 */
     @Column(updatable = false,name="created_at")
     @NotEmpty
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
     /** 更新日時 */
     @Column(name="updated_at")
     @NotEmpty
-    private LocalDateTime updatedAt;
+    private Timestamp updatedAt;
 
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private Authentication authentication;

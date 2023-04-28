@@ -27,17 +27,10 @@ public class EmployeeService {
         return employeeRepository.findById(id).get();
     }
 
-    /** 登録を行なう */
+    /** 登録を行なう（登録・更新・論理削除） */
     @Transactional
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
-    }
-
-    /** 削除を行なう */
-    @Transactional
-    public void deleteEmployee(Integer id) {
-        employeeRepository.deleteById(id);
-        return;
     }
 
 }
