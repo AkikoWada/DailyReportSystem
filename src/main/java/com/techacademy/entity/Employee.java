@@ -1,6 +1,5 @@
 package com.techacademy.entity;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
@@ -39,6 +38,7 @@ public class Employee {
 
     /** 削除フラグ */
     @NotEmpty
+    @Column(name="delete_flag")
     private Integer deleteFlag;
 
     /** 登録日時 */
