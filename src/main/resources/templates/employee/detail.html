@@ -7,32 +7,31 @@
 </head>
 <body>
     <h1>従業員管理システム</h1>
-    <h2>id:XXの従業員情報　詳細ページ</h2>
-        <table>
+    <h2>id:[[${employee.id}]]の従業員情報　詳細ページ</h2>
+
+        <table th:object="${employee}">
             <tr>
                 <td>社員番号</td>
-                <td th:text="*{code}"></td>
+                <td th:text="${employee.authentication.code}"></td>
             </tr>
             <tr>
                 <td>氏名</td>
-                <td th:text="$*{name}"></td>
+                <td th:text="${employee.name}"></td>
             </tr>
             <tr>
                 <td>権限</td>
-                <td th:text="$*{ole}"></td>
+                <td th:text="${employee.authentication.role}"></td>
             </tr>
             <tr>
                 <td>登録日時</td>
-                <td th:text="$*{createdAt}"></td>
-            </tr>
+                <td th:text="${#temporals.format(employee.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
             <tr>
                 <td>更新日時</td>
-                <td th:text="$*{updatedAt}"></td>
+                <td th:text="${#temporals.format(employee.updatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
             </tr>
         </table>
-    </form>
-    <script th:src="@{/js/user/list.js}"></script><!-- 未確認 -->
-    <a th:href="@{/employee/detail}">この従業員情報を更新する</a>
-    <a th:href="@{/employee/list}">一覧に戻る</a>
+
+    <a th:href="@{'/update/'+${employee.id}+'/'}">この従業員情報を更新する</a><br />
+    <a th:href="@{/}">一覧に戻る</a>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.techacademy.entity;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -11,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.Data;
@@ -18,6 +22,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "employee")
+@Where(clause = "delete_flag = 0")
 public class Employee {
 
     /** 主キー。自動生成 */
@@ -38,14 +43,14 @@ public class Employee {
     /** 登録日時 */
     @Column(updatable = false,name="created_at")
     @NotEmpty
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     /** 更新日時 */
     @Column(name="updated_at")
     @NotEmpty
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
-    @OneToOne(mappedBy="employee")
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private Authentication authentication;
 
     /** レコードが削除される前に行なう処理 */

@@ -1,7 +1,6 @@
 package com.techacademy.service;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +22,7 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    /** 1件検索して返す */
+    /** 1件検索して返す（詳細表示・更新） */
     public Employee getEmployee(Integer id) {
         return employeeRepository.findById(id).get();
     }
@@ -36,9 +35,9 @@ public class EmployeeService {
 
     /** 削除を行なう */
     @Transactional
-    public void deleteEmployee(Set<Integer> idck) {
-        for(Integer id : idck) {
-            employeeRepository.deleteById(id);
-        }
+    public void deleteEmployee(Integer id) {
+        employeeRepository.deleteById(id);
+        return;
     }
+
 }

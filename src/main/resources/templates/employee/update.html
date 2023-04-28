@@ -1,1 +1,42 @@
-UPDATE画面未作成
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>従業員管理システム 編集ページ</title>
+    <link rel="stylesheet" th:href="@{/css/employee/update.css}">
+</head>
+<body>
+    <h1>従業員管理システム</h1>
+    <h2>id:[[${employee.id}]]の従業員情報　編集ページ</h2>
+
+    <form method="post" th:action="@{/update/{id}/(id=${employee.id})}" th:object="${employee}">
+        <input type="hidden" id="id" name="id" th:value="${employee.id}">
+        <!-- 更新日時を取得する -->
+        <input type="hidden" id="updatedAt" name="updatedAt" th:value="${#calendars.createNow()}">
+        <p>
+        <label for="code">社員番号</label><br>
+        [[${employee.authentication.code}]]
+        <input type="hidden" id="code" name="code" th:value="${employee.authentication.code}">
+        </p>
+        <p>
+        <label for="name">氏名</label><br>
+        <input type="text" th:field="${employee.name}">
+        </p>
+        <p>
+        <label for="password">パスワード</label><br>
+        <input type="password" id="employee.authentication.password" name="employee.authentication.password">
+        </p>
+        <p>
+        <label for="role">権限</label><br>
+        <select th:field="${employee.authentication.role}">
+                    <option th:each="item:${T(com.techacademy.entity.Authentication.Role).values()}" th:value="${item}" th:text="${item}" th:selected="${employee.authentication.role} == ${item}">
+        </select>
+        </p>
+        <br>
+        <br>
+        <input type="submit" value="投稿"><br>
+        <a th:href="@{'/delete/'+${employee.id}+'/'}">この従業員情報を削除する</a><br>
+        <a th:href="@{/}">一覧に戻る</a>
+    </form>
+</body>
+</html>
