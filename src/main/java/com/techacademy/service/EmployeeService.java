@@ -1,3 +1,5 @@
+/** ★サービス★ */
+
 package com.techacademy.service;
 
 import java.util.List;
@@ -32,4 +34,5 @@ public class EmployeeService {
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
+
 }

@@ -1,3 +1,5 @@
+/** ★コントローラー★ */
+
 package com.techacademy.controller;
 
 import org.springframework.stereotype.Controller;
@@ -34,7 +36,7 @@ public class EmployeeController {
     public String getEmployee(@PathVariable("id") Integer id, Model model) {
         // Modelに登録
         model.addAttribute("employee", service.getEmployee(id));
-        // employee/detail.htmlに画面遷移
+        // 詳細画面に遷移
         return "employee/detail";
     }
 
@@ -50,8 +52,39 @@ public class EmployeeController {
     public String postRegister(Employee employee) {
         // Employee登録
         service.saveEmployee(employee);
-        // 一覧画面にリダイレクト
-        return "redirect:/employee/";
+        // 一覧画面にリダイレクト（→一時的に/）
+        return "redirect:/";
     }
 
+    /** 従業員の更新画面を表示 */
+    @GetMapping("/update/{id}/")
+    public String updateEmployee(@PathVariable("id") Integer id, Model model) {
+        // Modelに登録
+        model.addAttribute("employee", service.getEmployee(id));
+        // 更新画面に遷移
+        return "employee/update";
+    }
+
+    /** 従業員の更新処理 */
+    @PostMapping("/update/{id}/")
+    public String postEmployee(@PathVariable("id") Integer id, Employee employee) {
+        /** フォームから送信される項目はID、コード、名前、パスワード、権限 */
+        /** フォームから送信されない必須項目は削除フラグ */
+        Employee tableEmployee = service.getEmployee(id);
+        employee.setDeleteFlag(tableEmployee.getDeleteFlag());
+        service.saveEmployee(employee);
+        // 一覧画面にリダイレクト（→一時的に/）
+        return "redirect:/";
+    }
+
+    /** 従業員の削除処理（論理削除） */
+    @GetMapping("/delete/{id}/")
+    public String deleteEmployee(@PathVariable("id") Integer id, Employee employee) {
+        // Employee登録
+        Employee employeetable = service.getEmployee(id);
+        employeetable.setDeleteFlag(1);
+        service.saveEmployee(employeetable);
+        // 一覧画面にリダイレクト
+        return "redirect:/";
+    }
 }
