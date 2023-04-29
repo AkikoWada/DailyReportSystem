@@ -3,26 +3,22 @@
 <head>
 <meta charset="utf-8">
 <title>日報管理システム 従業員一覧</title>
-<link rel="stylesheet" th:href="@{/css/employee/list.css}">
+<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
-    <h1>日報管理システム</h1>
-    <h2 th:text="'従業員一覧(全' + ${employeelist.size} + '件）'"></h2>
 
-    <form method="post" th:action="@{/logout}">
-    <input type="submit" value="ログアウト">
-    </form><br>
+<div class="my-insert-class" th:insert="myfragment :: header"></div>
 
+<section id="main">
     <form name="frm" method="post" th:action="@{/employee/list}">
-        <table>
+        <table class="employee">
             <tr>
-                <th>ID</th>
                 <th>社員番号</th>
                 <th>氏名</th>
                 <th>操作</th>
             </tr>
             <tr th:each="employee : ${employeelist}">
-                <td th:text="${employee.id}"></td>
                 <td th:text="${employee.authentication.code}"></td>
                 <td th:text="${employee.name}"></td>
                 <td><a th:href="@{/employee/detail/{id}/(id=${employee.id})}">詳細を見る</a></td>
@@ -30,7 +26,7 @@
         </table>
     </form>
 
-    <script th:src="@{/js/user/list.js}"></script>
     <a th:href="@{/employee/register}">新規従業員の登録</a>
+</section>
 </body>
 </html>

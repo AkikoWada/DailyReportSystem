@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>従業員管理システム 編集ページ</title>
-    <link rel="stylesheet" th:href="@{/css/employee/update.css}">
+<meta charset="utf-8">
+<title>日報管理システム</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h1>従業員管理システム</h1>
+
+<div class="my-insert-class" th:insert="myfragment :: header"></div>
+
+<section id="main">
+
     <h2>id:[[${employee.id}]]の従業員情報　編集ページ</h2>
 
     <form method="post" th:action="@{/employee/update/{id}/(id=${employee.id})}" th:object="${employee}">
@@ -24,8 +28,7 @@
 
         <p>
         <label for="password">パスワード</label><br>
-        <input type="text" th:field="*{authentication.password}">
-        <!-- ↑type="password"にするとフォームが空白になってしまう／暗号化して送信する記述未搭載 -->
+        <input type="password" id="authentication.password" name="authentication.password" th:value="*{authentication.password}">
         </p>
 
         <p>
@@ -37,10 +40,13 @@
 
         <br><br>
 
-        <input type="submit" value="投稿"><br>
+        <input type="submit" value="投稿"><br><br>
 
         <a th:href="@{'/employee/delete/'+${employee.id}+'/'}">この従業員情報を削除する</a><br>
         <a th:href="@{/employee/}">一覧に戻る</a>
     </form>
+
+</section>
+
 </body>
 </html>

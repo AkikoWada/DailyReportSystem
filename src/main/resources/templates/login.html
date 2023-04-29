@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>日報管理システム　ログイン画面</title>
+<meta charset="utf-8">
+<title>日報管理システム</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h1>日報管理システム</h1>
-    <h2>ログイン</h2>
+
+<div class="my-insert-class" th:insert="myfragment :: header"></div>
+
+<section id="main">
+
+<h2>ログイン</h2>
+
     <p class="err" th:if="${param.error}">ユーザ名かパスワードが一致しませんでした。</p>
     <form method="post" action="/login" th:action="@{/login}">
-    <table>
+    
+    <table id="login">
         <tr>
             <td><label for="loginuser">社員番号</label></td>
             <td><input type="text" id="username" name="username" value=""></td>
@@ -24,5 +31,6 @@
         </tr>
     </table>
     </form>
+</section>
 </body>
 </html>

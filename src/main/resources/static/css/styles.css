@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+h1 {
+    background: #000;
+    color: #FFF;
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 0px;
+}
+h2 {
+    margin: 0px;
+}
+header {
+    background: #E0E0E0;
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 0;
+    margin-bottom: 20px;
+}
+navi ul{
+    padding: 0;
+    margin: 0;
+}
+navi li{
+    display: inline;
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 0;
+}
+#main {
+    padding: 10px;
+}
+table {
+    margin-bottom: 20px;
+}
+table.employee {
+    border-collapse:collapse;
+}
+th,td {
+    padding: 10px;
+}
+.employee th,.employee td {
+    border: solid 1px;
+}
+
+

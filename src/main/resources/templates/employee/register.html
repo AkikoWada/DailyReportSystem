@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>従業員管理システム 新規登録</title>
-    <link rel="stylesheet" th:href="@{/css/employee/list.css}">
+<meta charset="utf-8">
+<title>日報管理システム 従業員新規登録</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h1>従業員管理システム</h1>
-    <h2>新規登録</h2>
+
+<div class="my-insert-class" th:insert="myfragment :: header"></div>
+
+<section id="main">
+
+<h2>新規登録</h2>
 
     <form method="post" th:action="@{/employee/register/}" th:object="${employee}">
 
@@ -21,7 +25,7 @@
         </p>
         <p>
         <label for="password">パスワード</label><br>
-        <input type="password" th:field="*{authentication.password}">
+        <input type="password"  th:field="*{authentication.password}">
         </p>
         <p>
         <label for="role">権限</label><br>
@@ -38,5 +42,6 @@
 
         <p><a th:href="@{/employee/}">一覧に戻る</a></p>
 
+</section>
 </body>
 </html>

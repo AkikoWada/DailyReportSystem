@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>フラグメント</title>
+</head>
+<body>
+
+<div class="my-fragment-class" th:fragment="header">
+
+<h1>日報管理システム</h1>
+<header>
+<navi><form method="post" th:action="@{/logout}">
+    <ul>
+    <li><a href="/employee/">従業員管理</a></li>
+    <li>日報管理（未作成）</li>
+    <li>＜名前＞さん  <input type="submit" value="ログアウト"></li>
+    </ul>
+    </form>
+</navi>
+</header>
+
+</div>
+
+</body>
+</html>

@@ -2,14 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>従業員管理システム 詳細ページ</title>
-<link rel="stylesheet" th:href="@{/css/employee/list.css}">
+<title>日報管理システム</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h1>従業員管理システム</h1>
-    <h2>id:[[${employee.id}]]の従業員情報　詳細ページ</h2>
 
-        <table th:object="${employee}">
+<div class="my-insert-class" th:insert="myfragment :: header"></div>
+
+<section id="main">
+
+<h2>id:[[${employee.id}]]の従業員情報　詳細ページ</h2>
+
+        <table th:object="${employee}" class="employee">
             <tr>
                 <td>社員番号</td>
                 <td th:text="${employee.authentication.code}"></td>
@@ -33,5 +37,8 @@
 
     <a th:href="@{'/employee/update/'+${employee.id}+'/'}">この従業員情報を更新する</a><br />
     <a th:href="@{/employee/}">一覧に戻る</a>
+
+</section>
+
 </body>
 </html>

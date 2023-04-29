@@ -2,6 +2,8 @@
 
 package com.techacademy.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,11 @@ import com.techacademy.service.EmployeeService;
 @Controller
 @RequestMapping("employee")
 public class EmployeeController {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    // 実際にハッシュタグ化する部分は未実装
+
     private final EmployeeService service;
 
     public EmployeeController(EmployeeService service) {
@@ -43,17 +50,23 @@ public class EmployeeController {
     /** 従業員の登録画面を表示 */
     @GetMapping("/register")
     public String getRegister(@ModelAttribute Employee employee) {
-        // Employee登録画面に遷移
+        // 従業員の登録画面に遷移
         return "employee/register";
     }
 
     /** 従業員の登録処理 */
     @PostMapping("/register")
     public String postRegister(Employee employee) {
-        // Employee登録
+        /** 認証情報をセット */
+        employee.getAuthentication().setEmployee(employee);
+        /** パスワードを暗号化 */
+        String pass = employee.getAuthentication().getPassword();
+        employee.getAuthentication().setPassword(passwordEncoder.encode(pass));
+
+    // 従業員の登録
         service.saveEmployee(employee);
-        // 一覧画面にリダイレクト（→一時的に/）
-        return "redirect:/";
+        // 一覧画面にリダイレクト
+        return "redirect:/employee/";
     }
 
     /** 従業員の更新画面を表示 */
@@ -72,9 +85,15 @@ public class EmployeeController {
         /** フォームから送信されない必須項目は削除フラグ */
         Employee tableEmployee = service.getEmployee(id);
         employee.setDeleteFlag(tableEmployee.getDeleteFlag());
+        /** 認証情報をセット */
+        employee.getAuthentication().setEmployee(employee);
+        /** パスワードを暗号化 */
+        String pass = employee.getAuthentication().getPassword();
+        employee.getAuthentication().setPassword(passwordEncoder.encode(pass));
+        // 従業員の更新
         service.saveEmployee(employee);
-        // 一覧画面にリダイレクト（→一時的に/）
-        return "redirect:/";
+        // 一覧画面にリダイレクト
+        return "redirect:/employee/";
     }
 
     /** 従業員の削除処理（論理削除） */
@@ -85,6 +104,6 @@ public class EmployeeController {
         employeetable.setDeleteFlag(1);
         service.saveEmployee(employeetable);
         // 一覧画面にリダイレクト
-        return "redirect:/";
+        return "redirect:/employee/";
     }
 }
