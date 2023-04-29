@@ -27,10 +27,9 @@ public class EmployeeService {
         return employeeRepository.findById(id).get();
     }
 
-    /** 登録を行なう（登録・更新・論理削除） */
+    /** 従業員の登録を行なう */
     @Transactional
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
-
 }

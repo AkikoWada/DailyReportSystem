@@ -37,7 +37,6 @@ public class Authentication {
     /** 権限　3桁　列挙型（文字列） */
     @Column(length = 3)
     @Enumerated(EnumType.STRING)
-    @NotEmpty
     private Role role;
 
     /** 従業員テーブルのID */

@@ -16,6 +16,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.Data;
 
@@ -37,18 +39,17 @@ public class Employee {
     private String name;
 
     /** 削除フラグ */
-    @NotEmpty
     @Column(name="delete_flag")
     private Integer deleteFlag;
 
     /** 登録日時 */
+    @CreatedDate
     @Column(updatable = false,name="created_at")
-    @NotEmpty
     private Timestamp createdAt;
 
     /** 更新日時 */
+    @LastModifiedDate
     @Column(name="updated_at")
-    @NotEmpty
     private Timestamp updatedAt;
 
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
