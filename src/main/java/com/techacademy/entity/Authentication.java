@@ -47,4 +47,9 @@ public class Authentication {
     @OneToOne
     @JoinColumn(name="employee_id", referencedColumnName="id")
     private Employee employee;
+
+    public static String existsById(String inputCode) {
+        // TODO 自動生成されたメソッド・スタブ
+        return null;
+    }
 }

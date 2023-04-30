@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.techacademy.entity.Authentication;
 import com.techacademy.entity.Employee;
+import com.techacademy.repository.AuthenticationRepository;
 import com.techacademy.service.EmployeeService;
 
 @Controller
@@ -70,7 +72,7 @@ public class EmployeeController {
         String inputCode = employee.getAuthentication().getCode();
 
         // ★★未作成★★
-        if(inputCode=="") {
+        if(inputCode.equals("wada")) {
 
             // 通常の登録処理（認証情報セット→パス暗号化→SAVE→一覧にリダイレクト
             employee.getAuthentication().setEmployee(employee);
