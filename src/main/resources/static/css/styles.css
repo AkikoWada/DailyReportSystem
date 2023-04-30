@@ -41,7 +41,9 @@ th,td {
 .employee th,.employee td {
     border: solid 1px;
 }
-
+.err {
+    color: red;
+}
 
 /** 日報のスタイルシート　**/
 

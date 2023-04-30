@@ -62,17 +62,17 @@ public class EmployeeController {
         if(res.hasErrors()) {
             // エラーあり
             return getRegister(employee);
-        }
-        // 認証情報をセット */
+        } else {
+        // 認証情報をセット
         employee.getAuthentication().setEmployee(employee);
-        // パスワードを暗号化 */
-        String pass = employee.getAuthentication().getPassword();
-        employee.getAuthentication().setPassword(passwordEncoder.encode(pass));
-
-    // 従業員の登録
+        // パスワードを暗号化
+        String inputPassword = employee.getAuthentication().getPassword();
+        employee.getAuthentication().setPassword(passwordEncoder.encode(inputPassword));
+        // 従業員の登録
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト
         return "redirect:/employee/";
+        }
     }
 
     /** 従業員の更新画面を表示 */
@@ -92,10 +92,10 @@ public class EmployeeController {
         employee.setDeleteFlag(tableEmployee.getDeleteFlag());
         // 認証情報をセット */
         employee.getAuthentication().setEmployee(employee);
-        // パスワードの入力チェック→空欄だったらIDをキーに認証情報テーブルから現パスワードを取得してセット
+        // パスワードの入力チェック→空だったらIDをキーに認証情報テーブルから現パスワードを取得してセット
         String inputPassword = employee.getAuthentication().getPassword();
-        if(inputPassword == null){
-        employee.getAuthentication().setPassword(inputPassword); //★未作成-(inputPassword)部分、テーブルからIDをキーに現在のパスワードを取得
+        if(inputPassword.equals("")){
+        employee.getAuthentication().setPassword(tableEmployee.getAuthentication().getPassword());
         } else {
         // パスワード暗号化
         employee.getAuthentication().setPassword(passwordEncoder.encode(inputPassword));

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -20,6 +21,8 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.transaction.annotation.Transactional;
+
 import lombok.Data;
 
 @Data
@@ -61,4 +64,14 @@ public class Employee {
     /** 日報テーブル（OnetoMany） */
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Report> reports;
+
+    /** レコードが削除される前に行なう処理 */
+    @PreRemove
+    @Transactional
+    private void preRemove() {
+        // 認証エンティティからemployeeを切り離す
+        if (authentication!=null) {
+            authentication.setEmployee(null);
+        }
+    }
 }
