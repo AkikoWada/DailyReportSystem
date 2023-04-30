@@ -11,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import lombok.Data;
 
@@ -28,6 +29,7 @@ public class Authentication {
     @Id
     @Length(max=20)
     @NotEmpty
+    @UniqueElements
     private String code;
 
     /** パスワード */

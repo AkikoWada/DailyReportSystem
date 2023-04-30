@@ -19,6 +19,7 @@
         <label for="code">社員番号</label><br>
         <input type="text" th:field="*{authentication.code}" th:errorclass="err">
         <span th:errors="*{authentication.code}" class="err"></span>
+        <span th:text="${codedoubleerrormsg}" class="err"></span>
         </p>
         <p>
         <label for="name">氏名</label><br>

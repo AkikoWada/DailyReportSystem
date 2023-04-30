@@ -2,6 +2,8 @@
 
 package com.techacademy.controller;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -58,20 +60,31 @@ public class EmployeeController {
     /** 従業員の登録処理 */
     @PostMapping("/register")
     public String postRegister(@Validated Employee employee, BindingResult res, Model model) {
-        // 社員番号が重複する場合に更新処理を行わず登録画面に戻す
+
+        // バリデーションチェック
         if(res.hasErrors()) {
-            // エラーあり
-            return getRegister(employee);
+        return getRegister(employee);
         } else {
-        // 認証情報をセット
-        employee.getAuthentication().setEmployee(employee);
-        // パスワードを暗号化
-        String inputPassword = employee.getAuthentication().getPassword();
-        employee.getAuthentication().setPassword(passwordEncoder.encode(inputPassword));
-        // 従業員の登録
-        service.saveEmployee(employee);
-        // 一覧画面にリダイレクト
-        return "redirect:/employee/";
+
+        // 入力された社員番号で認証テーブルを検索した結果が0かどうか
+        String inputCode = employee.getAuthentication().getCode();
+
+        // ★★未作成★★
+        if(inputCode=="") {
+
+            // 通常の登録処理（認証情報セット→パス暗号化→SAVE→一覧にリダイレクト
+            employee.getAuthentication().setEmployee(employee);
+            String inputPassword = employee.getAuthentication().getPassword();
+            employee.getAuthentication().setPassword(passwordEncoder.encode(inputPassword));
+            service.saveEmployee(employee);
+            return "redirect:/employee/";
+
+            } else {
+
+            // 社員番号重複時の処理（Modelに引数追加→登録画面に遷移しエラーメッセージを出す）
+            model.addAttribute("codedoubleerrormsg", "社員番号が重複しています");
+            return getRegister(employee);
+            }
         }
     }
 
