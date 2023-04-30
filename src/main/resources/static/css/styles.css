@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/** 従業員管理のスタイルシート　**/
+
 h1 {
     background: #000;
     color: #FFF;
@@ -41,3 +43,8 @@ th,td {
 }
 
 
+/** 日報のスタイルシート　**/
+
+pre {
+    font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+}

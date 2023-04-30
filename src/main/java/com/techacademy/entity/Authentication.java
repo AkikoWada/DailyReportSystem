@@ -7,7 +7,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import javax.persistence.Column;
-import javax.validation.constraints.NotEmpty;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 

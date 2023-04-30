@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +23,6 @@ public class EmployeeController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    // 実際にハッシュタグ化する部分は未実装
 
     private final EmployeeService service;
 
@@ -56,10 +57,15 @@ public class EmployeeController {
 
     /** 従業員の登録処理 */
     @PostMapping("/register")
-    public String postRegister(Employee employee) {
-        /** 認証情報をセット */
+    public String postRegister(@Validated Employee employee, BindingResult res, Model model) {
+        // 社員番号が重複する場合に更新処理を行わず登録画面に戻す
+        if(res.hasErrors()) {
+            // エラーあり
+            return getRegister(employee);
+        }
+        // 認証情報をセット */
         employee.getAuthentication().setEmployee(employee);
-        /** パスワードを暗号化 */
+        // パスワードを暗号化 */
         String pass = employee.getAuthentication().getPassword();
         employee.getAuthentication().setPassword(passwordEncoder.encode(pass));
 
@@ -81,15 +87,19 @@ public class EmployeeController {
     /** 従業員の更新処理 */
     @PostMapping("/update/{id}/")
     public String postEmployee(@PathVariable("id") Integer id, Employee employee) {
-        /** フォームから送信される項目はID、コード、名前、パスワード、権限 */
-        /** フォームから送信されない必須項目は削除フラグ */
+        // フォームから送信されない必須項目の削除フラグをテーブルから取得
         Employee tableEmployee = service.getEmployee(id);
         employee.setDeleteFlag(tableEmployee.getDeleteFlag());
-        /** 認証情報をセット */
+        // 認証情報をセット */
         employee.getAuthentication().setEmployee(employee);
-        /** パスワードを暗号化 */
-        String pass = employee.getAuthentication().getPassword();
-        employee.getAuthentication().setPassword(passwordEncoder.encode(pass));
+        // パスワードの入力チェック→空欄だったらIDをキーに認証情報テーブルから現パスワードを取得してセット
+        String inputPassword = employee.getAuthentication().getPassword();
+        if(inputPassword == null){
+        employee.getAuthentication().setPassword(inputPassword); //★未作成-(inputPassword)部分、テーブルからIDをキーに現在のパスワードを取得
+        } else {
+        // パスワード暗号化
+        employee.getAuthentication().setPassword(passwordEncoder.encode(inputPassword));
+        }
         // 従業員の更新
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト

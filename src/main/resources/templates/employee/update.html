@@ -28,7 +28,8 @@
 
         <p>
         <label for="password">パスワード</label><br>
-        <input type="password" id="authentication.password" name="authentication.password" th:value="*{authentication.password}">
+        <input type="password" th:field="*{authentication.password}">
+        パスワードは変更する場合のみ入力してください
         </p>
 
         <p>

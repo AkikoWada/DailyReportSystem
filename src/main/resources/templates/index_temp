@@ -2,17 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>日報管理システム 日報一覧</title>
+<title>日報管理システムへようこそ</title>
 <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-
 <body>
 
 <div class="my-insert-class" th:insert="myfragment :: header"></div>
 
-<h2>日報 一覧</h2>
-
 <section id="main">
+
+<h2>日報管理システムへようこそ</h2>
+
+【自分の日報　一覧】
+
+テーブル
+
+（善）
+
+各自の日報一覧を表示する予定
+
     <form name="frm" method="post" th:action="@{/report/list}">
         <table class="report">
             <tr>
@@ -34,6 +42,8 @@
 ページネーションを挿入
 
     <a th:href="@{/report/register}">新規日報の登録</a>
+
 </section>
+
 </body>
 </html>
