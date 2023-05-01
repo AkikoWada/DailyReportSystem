@@ -1,2 +1,49 @@
-日報詳細画面 内容はpreを利用して改行まで表示させる
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>日報管理システム</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<div class="my-insert-class" th:insert="myfragment :: header"></div>
+
+<section id="main">
+
+<h2>日報　詳細ページ(日報No.[[${report.id}]])</h2>
+
+        <table th:object="${employee}" class="employee">
+            <tr>
+                <td>氏名</td>
+                <td th:text="${report.employee.name}"></td>
+            </tr>
+            <tr>
+                <td>日付</td>
+                <td th:text="${report.reportDate}"></td>
+            </tr>
+            <tr>
+                <td>タイトル</td>
+                <td th:text="${report.title}"></td>
+            </tr>
+            <tr>
+                <td>内容</td>
+                <td><pre th:text="${report.content}"></pre></td>
+            </tr>
+            <tr>
+                <td>登録日時</td>
+                <td th:text="${report.createdAt}"></td>
+            <tr>
+                <td>更新日時</td>
+                <td th:text="${report.updatedAt}"></td>
+            </tr>
+        </table>
+
+    <a th:href="@{'/report/update/'+${report.id}+'/'}">この日報を編集する</a><br />
+    <a th:href="@{/report/}">一覧に戻る</a>
+
+</section>
+
+</body>
+</html>
 

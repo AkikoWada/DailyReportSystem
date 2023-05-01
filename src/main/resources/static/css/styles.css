@@ -8,6 +8,11 @@ h1 {
     padding: 0.5em 1em 0.5em 1em;
     margin: 0px;
 }
+h1 a {
+	
+    text-decoration: none;
+    color: #FFFFFF;
+}
 h2 {
     margin: 0px;
 }
@@ -32,13 +37,13 @@ navi li{
 table {
     margin-bottom: 20px;
 }
-table.employee {
+table.employee, table.report  {
     border-collapse:collapse;
 }
 th,td {
     padding: 10px;
 }
-.employee th,.employee td {
+.employee th,.employee td,.report th,.report td {
     border: solid 1px;
 }
 .err {

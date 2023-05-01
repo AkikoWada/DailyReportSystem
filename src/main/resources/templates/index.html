@@ -13,6 +13,16 @@
 
 <h2>日報管理システムへようこそ</h2>
 
+<!-- ★sec:で取得 -->
+<span th:remove="tag" sec:authentication="name"></span>
+<span sec:authentication="principal.authorities"></span>
+
+<!-- ★#authentication.nameで取得 -->
+<div th:text="'こんにちは ' + ${#authentication.name} + ' さん'"></div>
+
+<!-- ★indexControllerを作成しauthentication.getName()で取得しModelで受け取る -->
+<p th:text="${msg}"></p>
+
 【自分の日報　一覧】
 
 </section>

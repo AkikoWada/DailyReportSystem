@@ -5,4 +5,7 @@ import com.techacademy.entity.Authentication;
 
 public interface AuthenticationRepository extends JpaRepository<Authentication, String> {
 
+    static boolean existsByCode(String inputCode) {
+        return false;
+    }
 }

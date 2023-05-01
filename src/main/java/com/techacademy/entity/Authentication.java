@@ -5,13 +5,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import lombok.Data;
 
@@ -28,8 +28,6 @@ public class Authentication {
     /** 社員番号 ログイン時に使う */
     @Id
     @Length(max=20)
-    @NotEmpty
-    @UniqueElements
     private String code;
 
     /** パスワード */
@@ -40,16 +38,10 @@ public class Authentication {
     /** 権限　3桁　列挙型（文字列） */
     @Column(length = 3)
     @Enumerated(EnumType.STRING)
-    @NotEmpty
     private Role role;
 
     /** 従業員テーブルのID */
     @OneToOne
     @JoinColumn(name="employee_id", referencedColumnName="id")
     private Employee employee;
-
-    public static String existsById(String inputCode) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
-    }
 }
