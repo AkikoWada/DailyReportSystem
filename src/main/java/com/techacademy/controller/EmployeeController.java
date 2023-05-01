@@ -57,29 +57,27 @@ public class EmployeeController {
     @PostMapping("/register")
     public String postRegister(@Validated Employee employee, BindingResult res, Model model) {
 
-        /** ★認証テーブルに同じcodeがないかどうかを検証する（→うまくいかない） */
+        /** 認証テーブルに同じcodeがないかどうかを検証する */
         String inputCode = employee.getAuthentication().getCode();
         if(service.checkCode(inputCode)) {
 
-        // 重複なかったらバリデーションチェック
+        // existsByCodeがtrue→重複ありなので社員番号重複時の処理（Modelに引数追加→登録画面に遷移しエラーメッセージ）
+            model.addAttribute("codedoubleerrormsg", "社員番号が重複しています");
+            return getRegister(employee);
+        } else {
+         // existsByCodeがfalse→重複なしなのでバリデーションチェックでエラーありの場合）
         if(res.hasErrors()) {
             return getRegister(employee);
             } else {
-
-                // 通常の登録処理（認証情報セット→パス暗号化→SAVE→一覧にリダイレクト
+                // エラーなしで通常の登録処理（認証情報セット→パス暗号化→SAVE→リダイレクト通常の登録処理
                 employee.getAuthentication().setEmployee(employee);
                 String inputPassword = employee.getAuthentication().getPassword();
                 employee.getAuthentication().setPassword(passwordEncoder.encode(inputPassword));
                 service.saveEmployee(employee);
                 return "redirect:/employee/";
             }
-    } else {
-        // 社員番号重複時の処理（Modelに引数追加→登録画面に遷移しエラーメッセージを出す）
-        model.addAttribute("codedoubleerrormsg", "社員番号が重複しています");
-        return getRegister(employee);
         }
     }
-
 
     /** 従業員の更新画面を表示 */
     @GetMapping("/update/{id}/")
