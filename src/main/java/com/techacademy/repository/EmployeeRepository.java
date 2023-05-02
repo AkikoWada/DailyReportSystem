@@ -7,4 +7,9 @@ import com.techacademy.entity.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
+    static Employee findByCode(String code) {
+        // TODO 自動生成されたメソッド・スタブ
+        return null;
+    }
+
 }

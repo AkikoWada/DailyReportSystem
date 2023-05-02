@@ -1,1 +1,53 @@
-日報登録画面
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="utf-8">
+<title>日報管理システム</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<div class="my-insert-class" th:insert="myfragment :: header"></div>
+
+<section id="main">
+
+<h2>日報　新規登録ページ</h2>
+
+[[${userid}]]
+
+<!--     <form method="post" th:action="@{/report/register/}" th:object="${report}">
+    <input type="hidden" id="employee_id" name="employee_id" value="1">
+        <p>
+        <label for="code">日付</label><br>
+        <input type="date" th:field="${report.reportDate}" th:errorclass="err">
+        <span th:errors="${report.reportDate}" class="err"></span>
+        </p>
+
+        <p>
+        <label for="code">氏名</label><br>
+        <span sec:authentication="principal.Employee.name"></span>
+        </p>
+
+        <p>
+        <label for="code">タイトル</label><br>
+        <input type="text" th:field="${report.title}" th:errorclass="err" size="50">
+        <span th:errors="${report.title}" class="err"></span>
+        </p>
+
+        <p>
+        <label for="code">内容</label><br>
+        <textarea th:field="${report.content}" th:errorclass="err" rows="10" cols="50"></textarea>
+        </p>
+
+        <br>
+        <br>
+        <input type="submit" value="投稿"><br>
+    </form>
+
+        <p><a th:href="@{/employee/}">一覧に戻る</a></p>
+
+</section> -->
+
+</body>
+</html>
+

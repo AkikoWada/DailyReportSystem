@@ -11,7 +11,7 @@
 
 <section id="main">
 
-<h2>日報　詳細ページ(日報No.[[${report.id}]])</h2>
+<h2>日報　詳細ページ</h2>
 
         <table th:object="${employee}" class="employee">
             <tr>
@@ -39,6 +39,7 @@
             </tr>
         </table>
 
+    <!-- 編集リンクは本人のみ表示 -->
     <a th:href="@{'/report/update/'+${report.id}+'/'}">この日報を編集する</a><br />
     <a th:href="@{/report/}">一覧に戻る</a>
 

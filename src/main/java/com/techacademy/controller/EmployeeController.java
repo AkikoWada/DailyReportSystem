@@ -46,14 +46,14 @@ public class EmployeeController {
         return "employee/detail";
     }
 
-    /** 従業員の登録画面を表示 */
+    /** 従業員の新規登録画面を表示 */
     @GetMapping("/register")
     public String getRegister(@ModelAttribute Employee employee) {
         // 従業員の登録画面に遷移
         return "employee/register";
     }
 
-    /** 従業員の登録処理 */
+    /** 従業員の新規登録処理 */
     @PostMapping("/register")
     public String postRegister(@Validated Employee employee, BindingResult res, Model model) {
 

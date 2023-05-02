@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>フラグメント</title>
@@ -10,13 +10,14 @@
 
 <h1><a href="/">日報管理システム</a></h1>
 <header>
-<navi><form method="post" th:action="@{/logout}">
+<navi>
+<form method="post" th:action="@{/logout}">
     <ul>
-    <li><a href="/employee/">従業員管理</a></li>
-    <li><a href="/report/">日報管理</a></li>
-    <li>＜名前＞さん  <input type="submit" value="ログアウト"></li>
+    <li sec:authorize="hasAuthority('管理者')"><a href="/employee/">従業員管理</a></li>
+    <li sec:authorize="isAuthenticated()"><a href="/report/">日報管理</a></li>
+    <li sec:authorize="isAuthenticated()"><span sec:authentication="principal.Employee.name"></span>さん  <input type="submit" value="ログアウト"></li>
     </ul>
-    </form>
+</form>
 </navi>
 </header>
 

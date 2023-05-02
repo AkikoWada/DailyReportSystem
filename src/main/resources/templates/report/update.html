@@ -1,1 +1,50 @@
-日報更新画面
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>日報管理システム　日報編集ページ</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<div class="my-insert-class" th:insert="myfragment :: header"></div>
+
+<section id="main">
+
+<h2>日報　編集ページ</h2>
+
+    <form method="post" th:action="@{/report/register/}" th:object="${report}">
+    <input type="hidden" id="employee_id" name="employee_id" value="★★★未完成★★★">
+
+        <p>
+        <label for="code">日付</label><br>
+        <input type="date" th:field="${report.reportDate}">
+        </p>
+
+        <p>
+        <label for="code">氏名</label><br>
+        <span sec:authentication="principal.Employee.name"></span>
+        </p>
+
+        <p>
+        <label for="code">タイトル</label><br>
+        <input type="text" th:field="${report.title}" th:errorclass="err" size="50">
+        </p>
+
+        <p>
+        <label for="code">内容</label><br>
+        <textarea th:field="${report.content}" th:errorclass="err" rows="10" cols="50"></textarea>
+        </p>
+
+        <br>
+        <br>
+        <input type="submit" value="投稿"><br>
+    </form>
+
+        <p><a th:href="@{/employee/}">一覧に戻る</a></p>
+
+</section>
+
+</body>
+</html>
+

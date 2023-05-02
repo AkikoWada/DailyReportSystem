@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>日報管理システム 従業員新規登録</title>
+<title>日報管理システム 従業員新規登録ページ</title>
 <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
@@ -11,9 +11,9 @@
 
 <section id="main">
 
-<h2>新規登録</h2>
+<h2>従業員　新規登録ページ</h2>
 
-    <form method="post" th:action="@{/employee/register/}" th:object="${employee}">
+    <form method="post" th:action="@{/register/}" th:object="${employee}">
 
         <p>
         <label for="code">社員番号</label><br>
