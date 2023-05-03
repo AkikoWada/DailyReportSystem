@@ -6,5 +6,4 @@ import com.techacademy.entity.Authentication;
 public interface AuthenticationRepository extends JpaRepository<Authentication, String> {
 
     boolean existsByCode(String code);
-    Integer getEmployeeId();
 }

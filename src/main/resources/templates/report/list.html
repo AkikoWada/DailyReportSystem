@@ -13,6 +13,7 @@
 <h2>日報 一覧</h2>
 
 <section id="main">
+
     <form name="frm" method="post" th:action="@{/report/list}">
         <table class="report">
             <tr>
@@ -30,10 +31,12 @@
         </table>
     </form>
 
-<p th:text="'(全' + ${reportlist.size} + '件）'"></p>
-ページネーションを挿入
-
+    <p th:text="'(全' + ${reportlist.size} + '件）'"></p>
+    <p>
     <a th:href="@{/report/register}">新規日報の登録</a>
+    </p>
+
 </section>
+
 </body>
 </html>

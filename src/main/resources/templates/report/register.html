@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <title>日報管理システム</title>
@@ -13,40 +13,38 @@
 
 <h2>日報　新規登録ページ</h2>
 
-[[${userid}]]
-
-<!--     <form method="post" th:action="@{/report/register/}" th:object="${report}">
-    <input type="hidden" id="employee_id" name="employee_id" value="1">
+<form method="post" th:action="@{/report/register/}" th:object="${report}">
         <p>
-        <label for="code">日付</label><br>
-        <input type="date" th:field="${report.reportDate}" th:errorclass="err">
-        <span th:errors="${report.reportDate}" class="err"></span>
+        <label for="reportDate">日付</label><br>
+        <input type="date" name="reportDate" id="reportDate">
         </p>
 
         <p>
-        <label for="code">氏名</label><br>
+        <label for="name">氏名</label><br>
         <span sec:authentication="principal.Employee.name"></span>
         </p>
 
         <p>
-        <label for="code">タイトル</label><br>
-        <input type="text" th:field="${report.title}" th:errorclass="err" size="50">
-        <span th:errors="${report.title}" class="err"></span>
+        <label for="title">タイトル</label><br>
+        <input type="text" name="title" id="title" size="50">
         </p>
 
         <p>
-        <label for="code">内容</label><br>
-        <textarea th:field="${report.content}" th:errorclass="err" rows="10" cols="50"></textarea>
+        <label for="content">内容</label><br>
+        <textarea type="content" name="content" rows="10" cols="50"></textarea>
         </p>
 
-        <br>
-        <br>
+        <!-- hiddenでemployee_idを送信する -->
+        <input type="hidden" id="employee.id" name="employee.id" th:value="${id}">
+
+        <p>
         <input type="submit" value="投稿"><br>
-    </form>
+        </p>
+</form>
 
-        <p><a th:href="@{/employee/}">一覧に戻る</a></p>
+        <p><a th:href="@{/report/}">一覧に戻る</a></p>
 
-</section> -->
+</section>
 
 </body>
 </html>

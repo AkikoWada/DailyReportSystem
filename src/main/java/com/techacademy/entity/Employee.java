@@ -10,6 +10,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PreRemove;
@@ -60,11 +61,11 @@ public class Employee {
     private Timestamp updatedAt;
 
     /** 認証テーブル（OnetoOne） */
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL)
     private Authentication authentication;
 
     /** 日報テーブル（OnetoMany） */
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
     private List<Report> reports;
 
     /** レコードが削除される前に行なう処理 */

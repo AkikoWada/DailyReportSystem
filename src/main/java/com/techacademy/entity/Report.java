@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -20,6 +21,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -60,10 +62,12 @@ public class Report {
     @Column(name="updated_at")
     private Timestamp updatedAt;
 
-    /** 従業員テーブルのID INT 外部キー（1対多） */
+    /** 従業員テーブルのID INT 外部キー（多対1） */
     @ManyToOne
     @JoinColumn(name="employee_id", referencedColumnName="id")
     private Employee employee;
 
-
+    public Integer getEmployeeId() {
+        return employee.getId();
+    }
 }

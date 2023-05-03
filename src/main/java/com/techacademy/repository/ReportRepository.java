@@ -10,4 +10,5 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
 
 /** トップページにログインした人の日報一覧を表示させるための絞り込み　**/
     List<Report> findByEmployee(Employee employee);
+    List<Report> findByEmployeeId(Integer id);
 }

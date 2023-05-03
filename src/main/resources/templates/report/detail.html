@@ -13,6 +13,8 @@
 
 <h2>日報　詳細ページ</h2>
 
+<span th:text="${updaterole}" class="err"></span>
+
         <table th:object="${employee}" class="employee">
             <tr>
                 <td>氏名</td>
@@ -39,8 +41,11 @@
             </tr>
         </table>
 
-    <!-- 編集リンクは本人のみ表示 -->
+    <!-- 編集ページへのリンクは作成者本人のみ表示 -->
+    <th:block th:if="${updateDisallowed != '1'}">
     <a th:href="@{'/report/update/'+${report.id}+'/'}">この日報を編集する</a><br />
+    </th:block>
+
     <a th:href="@{/report/}">一覧に戻る</a>
 
 </section>

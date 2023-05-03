@@ -14,11 +14,10 @@
 <h2>日報　編集ページ</h2>
 
     <form method="post" th:action="@{/report/register/}" th:object="${report}">
-    <input type="hidden" id="employee_id" name="employee_id" value="★★★未完成★★★">
 
         <p>
         <label for="code">日付</label><br>
-        <input type="date" th:field="${report.reportDate}">
+        <input type="date" th:field="*{reportDate}">
         </p>
 
         <p>
@@ -28,17 +27,21 @@
 
         <p>
         <label for="code">タイトル</label><br>
-        <input type="text" th:field="${report.title}" th:errorclass="err" size="50">
+        <input type="text" th:field="*{title}" th:errorclass="err" size="50">
         </p>
 
         <p>
         <label for="code">内容</label><br>
-        <textarea th:field="${report.content}" th:errorclass="err" rows="10" cols="50"></textarea>
+        <textarea th:field="*{content}" th:errorclass="err" rows="10" cols="50"></textarea>
         </p>
 
-        <br>
-        <br>
-        <input type="submit" value="投稿"><br>
+        <!-- hiddenでemployee_idを送信する -->
+        <input type="hidden" id="employee.id" name="employee.id" th:value="*{employee.id}">
+
+        <p>
+        <input type="submit" value="投稿">
+        </p>
+
     </form>
 
         <p><a th:href="@{/employee/}">一覧に戻る</a></p>

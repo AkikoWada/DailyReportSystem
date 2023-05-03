@@ -61,11 +61,11 @@ public class EmployeeController {
         String inputCode = employee.getAuthentication().getCode();
         if(service.checkCode(inputCode)) {
 
-        // existsByCodeがtrue→重複ありなので社員番号重複時の処理（Modelに引数追加→登録画面に遷移しエラーメッセージ）
+        // existsByCodeがtrue→重複あり／社員番号重複時の処理（Modelに引数追加→登録画面に遷移しエラーメッセージ）
             model.addAttribute("codedoubleerrormsg", "社員番号が重複しています");
             return getRegister(employee);
         } else {
-         // existsByCodeがfalse→重複なしなのでバリデーションチェックでエラーありの場合）
+         // existsByCodeがfalse→重複なし／バリデーションチェック）
         if(res.hasErrors()) {
             return getRegister(employee);
             } else {
