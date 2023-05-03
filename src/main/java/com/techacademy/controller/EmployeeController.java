@@ -33,23 +33,23 @@ public class EmployeeController {
     public String getList(Model model) {
         // 全件検索結果をModelに登録
         model.addAttribute("employeelist", service.getEmployeeList());
-        // employee/list.htmlに画面遷移
+        // 従業員一覧画面に遷移
         return "employee/list";
     }
 
     /** 従業員の詳細画面を表示 */
     @GetMapping("/detail/{id}/")
     public String getEmployee(@PathVariable("id") Integer id, Model model) {
-        // Modelに登録
+        // 1件をModelに登録
         model.addAttribute("employee", service.getEmployee(id));
-        // 詳細画面に遷移
+        // 従業員詳細画面に遷移
         return "employee/detail";
     }
 
     /** 従業員の新規登録画面を表示 */
     @GetMapping("/register")
     public String getRegister(@ModelAttribute Employee employee) {
-        // 従業員の登録画面に遷移
+        // 従業員新規登録画面に遷移
         return "employee/register";
     }
 
@@ -84,7 +84,7 @@ public class EmployeeController {
     public String updateEmployee(@PathVariable("id") Integer id, Model model) {
         // Modelに登録
         model.addAttribute("employee", service.getEmployee(id));
-        // 更新画面に遷移
+        // 従業員更新画面に遷移
         return "employee/update";
     }
 
@@ -106,18 +106,18 @@ public class EmployeeController {
         }
         // 従業員の更新
         service.saveEmployee(employee);
-        // 一覧画面にリダイレクト
+        // 従業員一覧画面にリダイレクト
         return "redirect:/employee/";
     }
 
     /** 従業員の削除処理（論理削除） */
     @GetMapping("/delete/{id}/")
     public String deleteEmployee(@PathVariable("id") Integer id, Employee employee) {
-        // Employee登録
+        // 1件を検索してDeleteFlagに1をセット
         Employee employeetable = service.getEmployee(id);
         employeetable.setDeleteFlag(1);
         service.saveEmployee(employeetable);
-        // 一覧画面にリダイレクト
+        // 従業員一覧画面にリダイレクト
         return "redirect:/employee/";
     }
 }

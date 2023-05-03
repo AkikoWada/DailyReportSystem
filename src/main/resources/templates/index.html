@@ -13,7 +13,7 @@
 
 <h2>日報管理システムへようこそ</h2>
 
-【自分の日報一覧】
+【自分の日報 一覧】
 
     <form name="frm" method="post" th:action="@{/}">
         <table class="report">
@@ -23,7 +23,7 @@
                 <th>タイトル</th>
                 <th>操作</th>
             </tr>
-            <tr th:each="report : ${reportlist}">
+            <tr th:each="report : ${myreportlist}">
                 <td th:text="${report.employee.name}"></td>
                 <td th:text="${report.reportDate}"></td>
                 <td th:text="${report.title}"></td>
@@ -32,7 +32,8 @@
         </table>
     </form>
 
-    <p th:text="'(全' + ${reportlist.size} + '件）'"></p>
+    <p th:text="'(全' + ${myreportlist.size} + '件）'"></p>
+
     <p>
     <a th:href="@{/report/register}">新規日報の登録</a>
     </p>
